@@ -44,12 +44,12 @@
     <link rel="dns-prefetch" href="https://assets.codepen.io" />
 
     <!-- Resource hints -->
-    <link rel="preload" href="/heart-animation/assets/css/style.css" as="style" />
-    <link rel="preload" href="/heart-animation/assets/js/three.min.js" as="script" />
-    <link rel="preload" href="/heart-animation/assets/js/main.js" as="script" />
+    <link rel="preload" href="assets/css/style.css" as="style" />
+    <link rel="preload" href="assets/js/three.min.js" as="script" />
+    <link rel="preload" href="assets/js/main.js" as="script" />
     <link
       rel="preload"
-      href="/heart-animation/assets/music/Goy Arachaporn.mp3"
+      href="assets/music/Goy Arachaporn.mp3"
       as="fetch"
       crossorigin
     />
@@ -70,10 +70,10 @@
       href='data:application/json,{"name":"3D Heart Animation","short_name":"Heart","theme_color":"#ff77fc","background_color":"#000000","display":"fullscreen"}'
     />
 
-    <title>3D Heart Animation - Interactive Three.js Experience</title>
+    <title>3D Heart Animation</title>
 
     <!-- Critical CSS -->
-    <link rel="stylesheet" href="/heart-animation/assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
     <!-- Loading indicator - hidden by default -->
@@ -240,7 +240,7 @@
 
     <!-- Scripts with proper loading order and error handling -->
     <script
-      src="/heart-animation/assets/js/three.min.js"
+      src="assets/js/three.min.js"
       onerror="handleScriptError('Three.js')"
     ></script>
     <script
@@ -254,32 +254,32 @@
       onerror="handleScriptError('TextGeometry')"
     ></script>
     <script
-      src="/heart-animation/assets/js/mesh-surface-sampler.js"
+      src="assets/js/mesh-surface-sampler.js"
       defer
       onerror="handleScriptError('Mesh Surface Sampler')"
     ></script>
     <script
-      src="/heart-animation/assets/js/trackball-controls.js"
+      src="assets/js/trackball-controls.js"
       defer
       onerror="handleScriptError('Trackball Controls')"
     ></script>
     <script
-      src="/heart-animation/assets/js/simplex-noise.js"
+      src="assets/js/simplex-noise.js"
       defer
       onerror="handleScriptError('Simplex Noise')"
     ></script>
     <script
-      src="/heart-animation/assets/js/obj-loader.js"
+      src="assets/js/obj-loader.js"
       defer
       onerror="handleScriptError('OBJ Loader')"
     ></script>
     <script
-      src="/heart-animation/assets/js/gsap.min.js"
+      src="assets/js/gsap.min.js"
       defer
       onerror="handleScriptError('GSAP')"
     ></script>
     <script
-      src="/heart-animation/assets/js/main.js"
+      src="assets/js/main.js"
       defer
       onerror="handleScriptError('Main Application')"
     ></script>
