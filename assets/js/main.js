@@ -338,22 +338,7 @@ class HeartAnimation {
   }
 
   init() {
-    try {
-        if (this.loadingElement) {
-            this.loadingElement.hidden = false;
-        }
-        this.startMainAnimation();
-    } catch (error) {
-        console.error("Critical initialization failed:", error);
-        const loadingText = document.getElementById("loading-text");
-        if (loadingText) {
-            loadingText.textContent = 'Đã có lỗi xảy ra. Vui lòng tải lại trang.';
-        }
-        const spinner = document.querySelector('.loading-spinner');
-        if (spinner) spinner.style.display = 'none';
-        const progress = document.querySelector('.loading-progress');
-        if (progress) progress.style.display = 'none';
-    }
+    this.setupIntroLogic();
   }
 
   setupIntroLogic() {
@@ -366,22 +351,11 @@ class HeartAnimation {
     setTimeout(() => {
         this.introScreen.style.display = 'none';
 
-        if (this.mainContent) {
-            this.mainContent.hidden = false;
+        if (this.loadingElement) {
+            this.loadingElement.hidden = false;
         }
 
-        Utils.showNotification(
-          "💖 Chào mừng em!",
-          "success"
-        );
-
-        const rotationHint = document.getElementById('rotation-hint');
-        if (rotationHint) {
-            rotationHint.hidden = false;
-            setTimeout(() => {
-                rotationHint.classList.add('show');
-            }, 500);
-        }
+        this.startMainAnimation();
     }, 1000);
   }
 
@@ -410,22 +384,23 @@ class HeartAnimation {
   }
 
   startMainAnimation() {
-    this.checkWebGLSupport();
-    this.setupScene();
-    this.setupCamera();
-    this.setupRenderer();
-    this.setupControls();
-    this.setupGroup();
-
-    // Re-initialize particle arrays here
-    this.positions = new Float32Array(CONFIG.PARTICLE_COUNT * 6);
-    this.colors = new Float32Array(CONFIG.PARTICLE_COUNT * 6);
-    
-    this.setupParticles();
-    this.setupAnimation();
-    this.setupAudio();
-    this.setupIntroLogic();
-    this.loadHeartModel();
+    try {
+        this.checkWebGLSupport();
+        this.setupScene();
+        this.setupCamera();
+        this.setupRenderer();
+        this.setupControls();
+        this.setupGroup();
+        this.positions = new Float32Array(CONFIG.PARTICLE_COUNT * 6);
+        this.colors = new Float32Array(CONFIG.PARTICLE_COUNT * 6);
+        this.setupParticles();
+        this.setupAnimation();
+        this.setupAudio();
+        this.loadHeartModel();
+    } catch (error) {
+        console.error("Critical initialization failed:", error);
+        this.showError("Đã có lỗi xảy ra. Vui lòng tải lại trang.");
+    }
   }
 
   checkWebGLSupport() {
@@ -987,12 +962,22 @@ class HeartAnimation {
         }, 1000);
     }
 
-    if (this.introScreen) {
-        this.introScreen.hidden = false;
-        this.introScreen.style.opacity = '1';
+    if (this.mainContent) {
+        this.mainContent.hidden = false;
     }
 
-    Utils.updateAriaLive("3D Heart Animation loaded and ready", "assertive");
+    Utils.showNotification(
+      "💖 Chào mừng em!",
+      "success"
+    );
+
+    const rotationHint = document.getElementById('rotation-hint');
+    if (rotationHint) {
+        rotationHint.hidden = false;
+        setTimeout(() => {
+            rotationHint.classList.add('show');
+        }, 500);
+    }
   }
 
   showError(message) {
@@ -1433,37 +1418,14 @@ class SparkPoint {
       .multiplyScalar(1.01 + noise * NOISE_SCALE_AMPLITUDE * beat.a);
     this.two = this.pos
       .clone()
-      .multiplyScalar(1 + noise2 * (beat.a + 0.3) - beat.a * 1.2);
+      .multiplyScalar(1.01 + noise2 * NOISE_SCALE_AMPLITUDE * beat.a);
   }
 }
 
-// Initialize the application when DOM is loaded
-document.addEventListener("DOMContentLoaded", () => {
-  // Check for WebGL support
-  if (!window.WebGLRenderingContext) {
-    Utils.showError(
-      "WebGL is not supported in your browser. Please use a modern browser with WebGL support."
-    );
-    return;
-  }
-
-  // Initialize the heart animation
-  let heartAnimation = null;
-
-  try {
-    heartAnimation = new HeartAnimation();
-
-    // Store reference for cleanup
-    window.heartAnimation = heartAnimation;
-  } catch (error) {
-    console.error("Failed to initialize HeartAnimation:", error);
-    Utils.showError(
-      "Failed to initialize the 3D animation. Please refresh the page.",
-      () => {
-        window.location.reload();
-      }
-    );
-  }
+// Initialize and start the application
+window.addEventListener('DOMContentLoaded', () => {
+    const app = new HeartAnimation();
+    app.init();
 });
 
 // Handle page visibility changes for performance
