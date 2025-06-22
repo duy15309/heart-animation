@@ -366,6 +366,10 @@ class HeartAnimation {
     setTimeout(() => {
         this.introScreen.style.display = 'none';
 
+        if (this.mainContent) {
+            this.mainContent.hidden = false;
+        }
+
         Utils.showNotification(
           "💖 Chào mừng em!",
           "success"
