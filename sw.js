@@ -1,20 +1,6 @@
 // Service Worker for 3D Heart Animation
 const CACHE_NAME = "heart-animation-v1";
 const urlsToCache = [
-<<<<<<< HEAD
-  ".",
-  "index.html",
-  "assets/css/style.css",
-  "assets/js/three.min.js",
-  "assets/js/main.js",
-  "assets/js/mesh-surface-sampler.js",
-  "assets/js/trackball-controls.js",
-  "assets/js/simplex-noise.js",
-  "assets/js/obj-loader.js",
-  "assets/js/gsap.min.js",
-  "assets/music/Goy Arachaporn.mp3",
-  "assets/heart_2.obj",
-=======
   "/",
   "/index.html",
   "/assets/css/style.css",
@@ -26,7 +12,6 @@ const urlsToCache = [
   "/assets/js/obj-loader.js",
   "/assets/js/gsap.min.js",
   "/assets/music/Goy_Arachaporn.mp3",
->>>>>>> bfcc727 (Initial commit: update full project with all features and beautiful backgrounds)
 ];
 
 // Install event - cache resources
