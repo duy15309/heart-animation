@@ -154,7 +154,7 @@ class HeartAnimation {
   }
 
   setupAudio() {
-      this.audio = new Audio("/heart-animation/assets/music/Goy Arachaporn.mp3");
+      this.audio = new Audio("assets/music/Goy Arachaporn.mp3");
       this.audio.volume = CONFIG.AUDIO_VOLUME;
       this.audio.loop = true;
   }
@@ -162,7 +162,7 @@ class HeartAnimation {
   loadHeartModel() {
     const loader = new THREE.OBJLoader();
     loader.load(
-      "/heart-animation/assets/heart_2.obj",
+      "assets/heart_2.obj",
       (obj) => this.onHeartLoaded(obj),
       (xhr) => {
         const percent = Math.round((xhr.loaded / xhr.total) * 100);
