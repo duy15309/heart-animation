@@ -690,7 +690,7 @@ class HeartAnimation {
   setupAudio() {
     try {
       // Create audio element
-      this.audio = new Audio("assets/music/Goy Arachaporn.mp3");
+      this.audio = new Audio("/heart-animation/assets/music/Goy Arachaporn.mp3");
       this.audio.preload = "auto";
       this.audio.volume = CONFIG.AUDIO_VOLUME; // Set volume to 70%
       this.audio.loop = true; // Enable auto-replay
